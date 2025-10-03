@@ -20,10 +20,11 @@ type NavItem = {
 const items = [
   { href: "/" as Route,           label: "Dashboard",         icon: <AiOutlineDashboard /> },
   { href: "/clustering" as Route, label: "Clustering Wilayah",icon: <BiScatterChart /> },
-  { href: "/tanyain" as Route,    label: "TanyaIn",           icon: <RiRobot2Line /> },
+  { href: "/tanyasdg" as Route,   label: "💬 TanyaSDGs",      icon: <RiRobot2Line /> },
   { href: "/pengaturan" as Route, label: "Pengaturan",        icon: <FiSettings /> },
   { href: "/tentang" as Route,    label: "Tentang",           icon: <BsInfoCircle /> },
 ] as const satisfies readonly NavItem[];
+
 
 export default function Sidebar() {
   const pathname = usePathname();

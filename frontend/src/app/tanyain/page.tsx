@@ -5,13 +5,13 @@ import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; text: string };
 
-export default function TanyaInPage() {
+export default function TanyaSDGsPage() {
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState<Msg[]>([
     {
       role: "assistant",
-      text: "🤖 Halo! Saya **TanyaIn**. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
+      text: "💬 Halo! Saya **SDGsBot**. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
     },
   ]);
 
@@ -54,7 +54,7 @@ export default function TanyaInPage() {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6 text-white">
       <h1 className="text-3xl font-bold text-center text-emerald-700 drop-shadow-md">
-        🤖 TanyaIn
+        💬 TanyaSDGs
       </h1>
       <p className="text-center">
         Tanyakan apa saja tentang data{" "}
@@ -87,7 +87,7 @@ export default function TanyaInPage() {
                     m.role === "user" ? "text-blue-100" : "text-emerald-700"
                   }
                 >
-                  {m.role === "user" ? "Kamu" : "TanyaIn"}:
+                  {m.role === "user" ? "Kamu" : "SDGsBot"}:
                 </b>{" "}
                 {/* @ts-expect-error react-markdown typing issue */}
                 <ReactMarkdown>{m.text}</ReactMarkdown>
@@ -98,7 +98,7 @@ export default function TanyaInPage() {
 
         {loading && (
           <div className="italic animate-pulse text-emerald-300">
-            TanyaIn sedang mengetik…
+            SDGsBot sedang mengetik…
           </div>
         )}
         <div ref={bottomRef} />
