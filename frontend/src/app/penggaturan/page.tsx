@@ -12,13 +12,13 @@ function readStored<T>(key: string, fallback: T): T {
   }
 }
 
-export default function PenggaturanPage() {
+export default function PengaturanPage() {
   // Pending (belum diterapkan ke dokumen)
-  const [pendingTheme, setPendingTheme] = useState<"light"|"dark">("dark");
+  const [pendingTheme, setPendingTheme] = useState<"light" | "dark">("dark");
   const [pendingBg, setPendingBg] = useState<string>("");
 
-  // Snapshot yang sudah diterapkan (untuk info kecil)
-  const [appliedTheme, setAppliedTheme] = useState<"light"|"dark">("dark");
+  // Snapshot yang sudah diterapkan (untuk info ringkas)
+  const [appliedTheme, setAppliedTheme] = useState<"light" | "dark">("dark");
   const [appliedBg, setAppliedBg] = useState<string>("");
 
   const fileRef = useRef<HTMLInputElement>(null);
@@ -26,7 +26,7 @@ export default function PenggaturanPage() {
   // Load preferensi awal
   useEffect(() => {
     try {
-      const t = readStored<"light"|"dark">("sdgs_theme", "dark");
+      const t = readStored<"light" | "dark">("sdgs_theme", "dark");
       const b = readStored<string>("sdgs_bg", "");
       setPendingTheme(t);
       setPendingBg(b || "");
@@ -77,17 +77,22 @@ export default function PenggaturanPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Penggaturan</h1>
+      <h1 className="text-2xl font-semibold">Pengaturan</h1>
       <p className="text-sm opacity-80">
-        Ubah tema dan latar belakang sesuai selera. Setelah memilih, klik <b>Terapkan</b> biar perubahan diterapkan di seluruh dashboard. 😄
+        Ubah tema dan latar belakang sesuai selera. Setelah memilih, klik <b>Terapkan</b>{" "}
+        agar perubahan diterapkan di seluruh dashboard. 😄
       </p>
 
       {/* Status ringkas */}
       <div className="glass-1 p-3 rounded-lg text-xs opacity-80">
-        <div>Aktif sekarang: <b>{appliedTheme === "light" ? "Light" : "Dark"}</b> • Background: <b>{appliedBg ? "Kustom" : "Default"}</b></div>
+        <div>
+          Aktif sekarang:{" "}
+          <b>{appliedTheme === "light" ? "Light" : "Dark"}</b> • Background:{" "}
+          <b>{appliedBg ? "Kustom" : "Default"}</b>
+        </div>
       </div>
 
-      {/* Tema (pending) */}
+      {/* Tema */}
       <section className="glass-1 p-4 rounded-xl space-y-3">
         <h2 className="font-medium">Tema</h2>
         <div className="flex items-center gap-4">
@@ -114,7 +119,7 @@ export default function PenggaturanPage() {
         </div>
       </section>
 
-      {/* Background (pending) */}
+      {/* Background */}
       <section className="glass-1 p-4 rounded-xl space-y-3">
         <h2 className="font-medium">Background</h2>
         <div className="grid sm:grid-cols-3 gap-4">
@@ -127,17 +132,28 @@ export default function PenggaturanPage() {
           </button>
 
           <button
-            onClick={() => setPendingBg("https://images.unsplash.com/photo-1503264116251-35a269479413?w=1600")}
+            onClick={() =>
+              setPendingBg(
+                "https://images.unsplash.com/photo-1503264116251-35a269479413?w=1600"
+              )
+            }
             className="glass-2 rounded-lg p-3 text-left hover:opacity-90 transition"
           >
             <p className="font-medium">Pemandangan</p>
-            <p className="text-xs opacity-70">gambar online (Unsplash)</p>
+            <p className="text-xs opacity-70">Gambar online (Unsplash)</p>
           </button>
 
           <div className="glass-2 rounded-lg p-3">
             <p className="font-medium mb-2">Upload Gambar Sendiri</p>
-            <input ref={fileRef} type="file" accept="image/*" onChange={onUpload} />
-            <p className="text-xs opacity-70 mt-1">Silahkan unggah file berformat .webp maksimal 400 kb</p>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              onChange={onUpload}
+            />
+            <p className="text-xs opacity-70 mt-1">
+              Unggah file berformat .webp maksimal 400 kb
+            </p>
           </div>
         </div>
 
@@ -145,12 +161,17 @@ export default function PenggaturanPage() {
           <div className="mt-4">
             <p className="text-sm mb-2">Pratinjau (belum diterapkan):</p>
             <div className="rounded-lg overflow-hidden border border-white/10">
-              <img src={pendingBg} alt="Preview" className="w-full max-h-64 object-cover" />
+              <img
+                src={pendingBg}
+                alt="Preview"
+                className="w-full max-h-64 object-cover"
+              />
             </div>
           </div>
         )}
       </section>
 
+      {/* Tombol aksi */}
       <div className="flex items-center gap-3">
         <button
           id="btn-terapkan"
@@ -161,7 +182,10 @@ export default function PenggaturanPage() {
           Terapkan
         </button>
         <button
-          onClick={() => { setPendingTheme(appliedTheme); setPendingBg(appliedBg); }}
+          onClick={() => {
+            setPendingTheme(appliedTheme);
+            setPendingBg(appliedBg);
+          }}
           className="px-4 py-2 rounded-lg glass-2 hover:opacity-90 transition"
         >
           Kembalikan ke setelan awal
@@ -170,3 +194,4 @@ export default function PenggaturanPage() {
     </div>
   );
 }
+
