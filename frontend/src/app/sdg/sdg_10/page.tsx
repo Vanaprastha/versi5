@@ -1,36 +1,60 @@
 // @ts-nocheck
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  CartesianGrid, Legend, LabelList } from "recharts";
 
-export default function SDG10Page() {
-  const [data, setData] = useState<any[]>([]);
+export default function SDG10Page() {{
+  const [dataSDG10, setDataSDG10] = useState<any[]>([]);
+  const [insight, setInsight] = useState<string>("");
 
-  useEffect(() => {
+  useEffect(() => {{
     fetch("/api/sdgs10")
-      .then((res) => res.json())
-      .then((d) => setData(d))
-      .catch((err) => console.error(err));
-  }, []);
+      .then(res => res.json())
+      .then(d => setDataSDG10(d))
+      .catch(err => console.error(err));
+  }}, []);
+
+  useEffect(() => {{
+    fetch("/api/insight?sdg=10")
+      .then(res => res.json())
+      .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
+      .catch(err => setInsight("sedang memberikan insight berdasarkan data...."));
+  }}, []);
 
   return (
-    <div className="p-6 space-y-4">
-      <h2 className="text-xl font-bold">SDG 10 Detail</h2>
-      {data.length === 0 ? (
-        <p>Belum ada data untuk ditampilkan.</p>
-      ) : (
-        <pre className="bg-black/30 p-4 rounded-lg text-sm overflow-x-auto">
-          {JSON.stringify(data, null, 2)}
-        </pre>
-      )}
-    
-      {/* Card Insight dari LLM */}
+    <div className="space-y-6 p-6">
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h2 className="text-xl font-bold drop-shadow text-blue-400">
+          SDG 10
+        </h2>
+      </div>
+
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h3 className="text-lg font-semibold mb-4">Visualisasi Data SDG 10</h3>
+        <div className="w-full h-96">
+          <ResponsiveContainer>
+            <BarChart data={{dataSDG10}}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{{{ fill: "#fff" }}}} />
+              <YAxis stroke="#fff" tick={{{{ fill: "#fff" }}}} />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey={{Object.keys(dataSDG10[0] || {{}})[1]}} fill="#22c55e" radius={[6, 6, 0, 0]}>
+                <LabelList dataKey={{Object.keys(dataSDG10[0] || {{}})[1]}} position="top" fill="#fff" />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
         <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
         <p className="text-sm text-gray-100 whitespace-pre-line">
-          {insight || "sedang memberikan insight berdasarkan data...."}
+          {{insight || "sedang memberikan insight berdasarkan data...."}}
         </p>
       </div>
-</div>
+    </div>
   );
-}
+}}

@@ -1,154 +1,60 @@
 // @ts-nocheck
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip
-} from "recharts";
+import { useState, useEffect } from "react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  CartesianGrid, Legend, LabelList } from "recharts";
 
-export default function SDG15Page() {
-  const [data, setData] = useState<any[]>([]);
+export default function SDG15Page() {{
+  const [dataSDG15, setDataSDG15] = useState<any[]>([]);
+  const [insight, setInsight] = useState<string>("");
 
-  useEffect(() => {
+  useEffect(() => {{
     fetch("/api/sdgs15")
-      .then((res) => res.json())
-      .then((d) => setData(d))
-      .catch((err) => console.error(err));
-  }, []);
+      .then(res => res.json())
+      .then(d => setDataSDG15(d))
+      .catch(err => console.error(err));
+  }}, []);
 
-  const COLORS = ["#22c55e", "#ef4444", "#3b82f6", "#f59e0b", "#8b5cf6"];
+  useEffect(() => {{
+    fetch("/api/insight?sdg=15")
+      .then(res => res.json())
+      .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
+      .catch(err => setInsight("sedang memberikan insight berdasarkan data...."));
+  }}, []);
 
-  // Ringkasan untuk cards
-  const summary = {
-    tepiHutan: data.filter((d) =>
-      String(d["Lokasi wilayah desa/kelurahan terhadap kawasan hutan/hutan"]).includes("tepi")
-    ).length,
-    luarHutan: data.filter((d) =>
-      String(d["Lokasi wilayah desa/kelurahan terhadap kawasan hutan/hutan"]).includes("luar")
-    ).length,
-    adaPenanaman: data.filter((d) =>
-      String(d["Penanaman/pemeliharaan pepohonan di lahan kritis, penanaman mangrove, dan sejenisnya oleh masyarakat desa/kelurahan"]).includes("Ada")
-    ).length,
-  };
+  return (
+    <div className="space-y-6 p-6">
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h2 className="text-xl font-bold drop-shadow text-blue-400">
+          SDG 15
+        </h2>
+      </div>
 
-  // Tooltip custom
-  const CustomTooltipPie = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const category = payload[0].name;
-      const key = payload[0].payload.key;
-      const desaList = data
-        .filter((row) => String(row[key]).trim() === category)
-        .map((row) => row.nama_desa);
-
-      return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
-          <p className="font-semibold">{category}</p>
-          <p className="italic">Desa:</p>
-          <ul className="list-disc list-inside">
-            {desaList.map((d, i) => (
-              <li key={i}>{d}</li>
-            ))}
-          </ul>
-        </div>
-      );
-    }
-    return null;
-  };
-
-  // Generate pie chart per indikator
-  const renderPieChart = (key: string) => {
-    const counts: Record<string, number> = {};
-    data.forEach((row) => {
-      const val = String(row[key]).trim();
-      if (val) counts[val] = (counts[val] || 0) + 1;
-    });
-    const pieData = Object.entries(counts).map(([name, value]) => ({
-      name,
-      value,
-      key,
-    }));
-
-    return (
-      <div className="glass-2 p-4 rounded-xl shadow">
-        <h4 className="text-md font-semibold mb-4 text-center">{key}</h4>
-        <div className="w-full h-72 flex justify-center">
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h3 className="text-lg font-semibold mb-4">Visualisasi Data SDG 15</h3>
+        <div className="w-full h-96">
           <ResponsiveContainer>
-            <PieChart>
-              <Pie
-                data={pieData}
-                dataKey="value"
-                nameKey="name"
-                outerRadius={90}
-                label
-              >
-                {pieData.map((entry, i) => (
-                  <Cell
-                    key={i}
-                    fill={
-                      entry.name.toLowerCase().includes("tidak")
-                        ? "#ef4444" // merah untuk "tidak ada"
-                        : COLORS[i % COLORS.length]
-                    }
-                  />
-                ))}
-              </Pie>
-              <Legend verticalAlign="bottom" layout="horizontal" align="center" />
-              <Tooltip content={<CustomTooltipPie />} />
-            </PieChart>
+            <BarChart data={{dataSDG15}}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{{{ fill: "#fff" }}}} />
+              <YAxis stroke="#fff" tick={{{{ fill: "#fff" }}}} />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey={{Object.keys(dataSDG15[0] || {{}})[1]}} fill="#22c55e" radius={[6, 6, 0, 0]}>
+                <LabelList dataKey={{Object.keys(dataSDG15[0] || {{}})[1]}} position="top" fill="#fff" />
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
-    );
-  };
 
-  return (
-    <div className="p-6 space-y-6">
-      {/* Header */}
-      <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-green-500">
-          SDG 15: Ekosistem Daratan
-        </h2>
-        <p className="text-sm text-gray-200">
-          Visualisasi: kondisi desa terhadap kawasan hutan, kebakaran hutan, penanaman pohon, dan program perhutanan
-        </p>
-      </div>
-
-      {/* Cards Ringkasan */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
-          <h4 className="font-semibold text-sm">Desa di Tepi Hutan</h4>
-          <p className="text-xl font-bold text-green-400">{summary.tepiHutan}</p>
-        </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
-          <h4 className="font-semibold text-sm">Desa di Luar Hutan</h4>
-          <p className="text-xl font-bold text-green-400">{summary.luarHutan}</p>
-        </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
-          <h4 className="font-semibold text-sm">Ada Penanaman Pohon</h4>
-          <p className="text-xl font-bold text-green-400">{summary.adaPenanaman}</p>
-        </div>
-      </div>
-
-      {/* Pie Charts */}
-      <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h3 className="text-lg font-semibold mb-4">Indikator Kehutanan & Lingkungan</h3>
-        <div className="grid grid-cols-2 gap-6">
-          {renderPieChart("Lokasi wilayah desa/kelurahan terhadap kawasan hutan/hutan")}
-          {renderPieChart("Kejadian Kebakaran hutan dan lahan")}
-          {renderPieChart("Penanaman/pemeliharaan pepohonan di lahan kritis, penanaman mangrove, dan sejenisnya oleh masyarakat desa/kelurahan")}
-          {renderPieChart("Keberadaan Program perhutanan sosial")}
-          {renderPieChart("Kepemilikan hutan milik desa")}
-        </div>
-      </div>
-    
-      {/* Card Insight dari LLM */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
         <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
         <p className="text-sm text-gray-100 whitespace-pre-line">
-          {insight || "sedang memberikan insight berdasarkan data...."}
+          {{insight || "sedang memberikan insight berdasarkan data...."}}
         </p>
       </div>
-</div>
+    </div>
   );
-}
-
+}}
