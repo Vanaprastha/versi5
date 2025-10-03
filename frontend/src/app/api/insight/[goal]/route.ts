@@ -54,7 +54,7 @@ export async function GET(_req: Request, { params }: { params: { goal: string } 
     const villages = rows.map(r => r.nama_desa);
     const clusters = rows.map(r => r.cluster);
     const artiClusters = rows.map(r => r.arti_cluster);
-    const summaryCols = valueCols.length ? valueCols : Object.keys(rows[0] || {}).filter(k => k not in ["nama_desa","cluster","arti_cluster"]);
+    const summaryCols = valueCols.length ? valueCols : Object.keys(rows[0] || {}).filter((k) => !["nama_desa","cluster","arti_cluster"].includes(k));
 
     const colStats: Record<string, { avg: number, max: { desa: string, val: number }, min: { desa: string, val: number } }> = {};
     for (const c of summaryCols) {
