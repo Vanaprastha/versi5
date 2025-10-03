@@ -191,7 +191,8 @@ export default function SDG3Page() {
           })}
         </div>
       </div>
-    </div>
+      <InsightCard goal=3 />
+  </div>
   );
 }
 

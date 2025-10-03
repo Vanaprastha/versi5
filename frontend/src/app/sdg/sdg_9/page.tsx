@@ -150,7 +150,8 @@ export default function SDG9Page() {
           {renderPieChart("Akses jalan darat dari sentra produksi pertanian ke jalan utama dapat dilalui kendaraan roda 4 lebih", "Akses Jalan Sentra Pertanian")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=9 />
+  </div>
   );
 }
 

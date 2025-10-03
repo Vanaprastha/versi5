@@ -25,6 +25,7 @@ export default function SDG10Page() {
           {JSON.stringify(data, null, 2)}
         </pre>
       )}
-    </div>
+      <InsightCard goal=10 />
+  </div>
   );
 }

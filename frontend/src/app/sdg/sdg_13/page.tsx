@@ -156,7 +156,8 @@ export default function SDG13Page() {
           {renderPieChart("Partisipasi_Simulasi_Bencana")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=13 />
+  </div>
   );
 }
 

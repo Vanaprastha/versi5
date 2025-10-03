@@ -142,7 +142,8 @@ export default function SDG15Page() {
           {renderPieChart("Kepemilikan hutan milik desa")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=15 />
+  </div>
   );
 }
 

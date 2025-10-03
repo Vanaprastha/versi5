@@ -149,7 +149,8 @@ export default function SDG14Page() {
           {renderPieChart("Status desa termasuk Kampung Pesisir Tangguh ")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=14 />
+  </div>
   );
 }
 

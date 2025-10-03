@@ -178,7 +178,8 @@ export default function SDG16Page() {
           ))}
         </div>
       </div>
-    </div>
+      <InsightCard goal=16 />
+  </div>
   );
 }
 

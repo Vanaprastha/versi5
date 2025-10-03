@@ -135,7 +135,8 @@ export default function SDG17Page() {
           {renderPieChart("status penerimaan program siaran televisi/radio swasta", "Status penerimaan siaran televisi/radio swasta")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=17 />
+  </div>
   );
 }
 

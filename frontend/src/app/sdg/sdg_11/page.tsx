@@ -145,7 +145,8 @@ export default function SDG11Page() {
           {renderPieChart("Keberadaan program pengelolaan lingkungan perumahan desa/kelurahan")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=11 />
+  </div>
   );
 }
 

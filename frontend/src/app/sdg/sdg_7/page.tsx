@@ -169,7 +169,8 @@ export default function SDG7Page() {
           })}
         </div>
       </div>
-    </div>
+      <InsightCard goal=7 />
+  </div>
   );
 }
 

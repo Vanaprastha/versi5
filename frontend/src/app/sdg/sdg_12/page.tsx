@@ -148,7 +148,8 @@ export default function SDG12Page() {
           {renderPieChart("Frekuensi pengangkutan sampah dalam 1 minggu")}
         </div>
       </div>
-    </div>
+      <InsightCard goal=12 />
+  </div>
   );
 }
 
