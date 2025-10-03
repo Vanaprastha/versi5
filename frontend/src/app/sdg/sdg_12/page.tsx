@@ -33,7 +33,6 @@ export default function SDG12Page() {
     pengangkutan: data.filter(
       (d) => d["Frekuensi pengangkutan sampah dalam 1 minggu"] !== "tidak ada pengangkutan sampah"
     ).length,
-  };
 
   // Tooltip custom untuk Pie Chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -57,7 +56,6 @@ export default function SDG12Page() {
       );
     }
     return null;
-  };
 
   // Fungsi untuk render pie chart
   const renderPieChart = (key: string) => {
@@ -103,7 +101,6 @@ export default function SDG12Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">

@@ -44,7 +44,6 @@ export default function SDG6Page() {
         String(d["Pencemaran Limbah Sungai"]).toLowerCase() === "tidak ada" ||
         d["Pencemaran Limbah Sungai"] === 0
     ).length,
-  };
 
   // Tooltip custom Bar
   const CustomTooltipBar = ({ active, payload, label }: any) => {
@@ -61,7 +60,6 @@ export default function SDG6Page() {
       );
     }
     return null;
-  };
 
   // Tooltip custom Pie
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -85,7 +83,6 @@ export default function SDG6Page() {
       );
     }
     return null;
-  };
 
   return (
     <div className="p-6 space-y-6">

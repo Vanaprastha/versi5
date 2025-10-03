@@ -45,7 +45,6 @@ export default function SDG5Page() {
       );
     }
     return null;
-  };
 
   const indikator = [
     { key: "Jumlah Kader KB/KIA", color: "#3b82f6", short: "Kader KB/KIA" },

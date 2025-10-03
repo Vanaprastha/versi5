@@ -34,7 +34,6 @@ export default function SDG14Page() {
     tangguh: data.filter((d) =>
       String(d["Status desa termasuk Kampung Pesisir Tangguh "]).includes("termasuk")
     ).length,
-  };
 
   // Tooltip custom untuk pie chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -58,7 +57,6 @@ export default function SDG14Page() {
       );
     }
     return null;
-  };
 
   // Render pie chart per indikator
   const renderPieChart = (key: string) => {
@@ -104,7 +102,6 @@ export default function SDG14Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">

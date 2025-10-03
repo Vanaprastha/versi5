@@ -31,7 +31,6 @@ export default function SDG15Page() {
     adaPenanaman: data.filter((d) =>
       String(d["Penanaman/pemeliharaan pepohonan di lahan kritis, penanaman mangrove, dan sejenisnya oleh masyarakat desa/kelurahan"]).includes("Ada")
     ).length,
-  };
 
   // Tooltip custom
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -55,7 +54,6 @@ export default function SDG15Page() {
       );
     }
     return null;
-  };
 
   // Generate pie chart per indikator
   const renderPieChart = (key: string) => {
@@ -101,7 +99,6 @@ export default function SDG15Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">

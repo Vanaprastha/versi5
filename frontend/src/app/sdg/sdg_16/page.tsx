@@ -32,7 +32,6 @@ export default function SDG16Page() {
     ).length,
     lembaga: data.reduce((acc, d) => acc + (d["Jumlah jenis lembaga adat"] || 0), 0),
     konflik: data.reduce((acc, d) => acc + (d["Jumlah kejadian perkelahian Kelompok masyarakat dengan aparat keamanan"] || 0), 0)
-  };
 
   // Tooltip custom untuk bar chart
   const CustomTooltipBar = ({ active, payload, label }: any) => {
@@ -47,7 +46,6 @@ export default function SDG16Page() {
       );
     }
     return null;
-  };
 
   // Tooltip custom untuk pie chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -69,7 +67,6 @@ export default function SDG16Page() {
       );
     }
     return null;
-  };
 
   // Fungsi untuk hitung data pie
   const countCategory = (key: string) => {
@@ -79,7 +76,6 @@ export default function SDG16Page() {
       counts[val] = (counts[val] || 0) + 1;
     });
     return Object.entries(counts).map(([name, value]) => ({ name, value, key }));
-  };
 
   const pieInisiatif = countCategory("kegiatan pengaktifan sistem keamanan lingkungan berasal dari inisiatif warga");
   const pieRegu = countCategory("Pembentukan/pengaturan regu keamanan oleh warga untuk menjaga keamanan lingkungan di desa/kelurahan");

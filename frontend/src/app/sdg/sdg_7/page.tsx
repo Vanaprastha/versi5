@@ -42,7 +42,6 @@ export default function SDG7Page() {
       );
     }
     return null;
-  };
 
   // Tooltip custom pie
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -64,7 +63,6 @@ export default function SDG7Page() {
       );
     }
     return null;
-  };
 
   return (
     <div className="p-6 space-y-6">

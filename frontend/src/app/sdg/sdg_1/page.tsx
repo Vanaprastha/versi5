@@ -55,7 +55,6 @@ export default function SDG1Page() {
       );
     }
     return null;
-  };
 
   // Tooltip untuk Pie Chart (daftar desa per kategori)
   const CustomTooltip = ({ active, payload }: any) => {
@@ -82,7 +81,6 @@ export default function SDG1Page() {
       );
     }
     return null;
-  };
 
   return (
     <div className="space-y-6 p-6">
