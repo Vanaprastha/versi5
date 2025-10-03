@@ -12,7 +12,7 @@ function readStored<T>(key: string, fallback: T): T {
   }
 }
 
-export default function PenggaturanPage() {
+export default function PengaturanPage() {
   // Pending (belum diterapkan ke dokumen)
   const [pendingTheme, setPendingTheme] = useState<"light"|"dark">("dark");
   const [pendingBg, setPendingBg] = useState<string>("");
@@ -77,7 +77,7 @@ export default function PenggaturanPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Penggaturan</h1>
+      <h1 className="text-2xl font-semibold">Pengaturan</h1>
       <p className="text-sm opacity-80">
         Ubah tema dan latar belakang sesuai selera. Setelah memilih, klik <b>Terapkan</b> biar perubahan diterapkan di seluruh dashboard. 😄
       </p>
