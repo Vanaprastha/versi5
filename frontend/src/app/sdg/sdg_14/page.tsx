@@ -150,4 +150,3 @@ export default function SDG14Page() {
   </div>
   );
 }
-

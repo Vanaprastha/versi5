@@ -146,4 +146,3 @@ export default function SDG11Page() {
   </div>
   );
 }
-

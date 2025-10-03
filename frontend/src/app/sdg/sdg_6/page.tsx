@@ -197,4 +197,3 @@ export default function SDG6Page() {
   </div>
   );
 }
-

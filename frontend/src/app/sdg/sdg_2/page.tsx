@@ -178,4 +178,3 @@ export default function SDG2Page() {
   </div>
   );
 }
-
