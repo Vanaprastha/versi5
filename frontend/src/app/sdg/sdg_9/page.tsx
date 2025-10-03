@@ -9,14 +9,14 @@ export default function SDG9Page() {{
   const [dataSDG9, setDataSDG9] = useState<any[]>([]);
   const [insight, setInsight] = useState<string>("");
 
-  useEffect(() => {{
+  useEffect(() => {
     fetch("/api/sdgs9")
       .then(res => res.json())
       .then(d => setDataSDG9(d))
       .catch(err => console.error(err));
   }, []);
 
-  useEffect(() => {{
+  useEffect(() => {
     fetch("/api/insight?sdg=9")
       .then(res => res.json())
       .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
