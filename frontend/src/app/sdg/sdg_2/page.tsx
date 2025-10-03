@@ -8,7 +8,16 @@ import {
 } from "recharts";
 
 export default function SDG2Page() {
-  const [dataSDG2, setDataSDG2] = useState<any[]>([]);
+  const [dataSDG
+  const [insight, setInsight] = useState<string>("");
+
+  useEffect(() => {
+    fetch("/api/sdgs2_insight")
+      .then(res => res.json())
+      .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
+      .catch(err => setInsight("sedang memberikan insight berdasarkan data...."));
+  }, []);
+2, setDataSDG2] = useState<any[]>([]);
 
   useEffect(() => {
     fetch("/api/sdgs2")
@@ -174,7 +183,15 @@ export default function SDG2Page() {
           })}
         </div>
       </div>
-    </div>
+    
+      {/* Card Insight dari LLM */}
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
+        <p className="text-sm text-gray-100 whitespace-pre-line">
+          {insight || "sedang memberikan insight berdasarkan data...."}
+        </p>
+      </div>
+</div>
   );
 }
 

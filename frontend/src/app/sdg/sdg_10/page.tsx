@@ -23,6 +23,14 @@ export default function SDG10Page() {
           {JSON.stringify(data, null, 2)}
         </pre>
       )}
-    </div>
+    
+      {/* Card Insight dari LLM */}
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
+        <p className="text-sm text-gray-100 whitespace-pre-line">
+          {insight || "sedang memberikan insight berdasarkan data...."}
+        </p>
+      </div>
+</div>
   );
 }
