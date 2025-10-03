@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { GiNetworkBars } from "react-icons/gi";
 import { BiScatterChart } from "react-icons/bi";
 import { RiRobot2Line } from "react-icons/ri";
 import { BsInfoCircle } from "react-icons/bs";
@@ -13,16 +12,15 @@ import Image from "next/image";
 type Item = { href: string; label: string; icon: JSX.Element };
 
 const umumMenu: Item[] = [
-  { href: "/dashboard", label: "Dashboard",   icon: <AiOutlineDashboard /> },
-  { href: "/prediksi",  label: "Prediksi",    icon: <GiNetworkBars /> },
-  { href: "/clustering",label: "Clustering",  icon: <BiScatterChart /> },
-  { href: "/chatbot",   label: "Chatbot LLM", icon: <RiRobot2Line /> },
-  { href: "/tentang",   label: "Tentang",     icon: <BsInfoCircle /> },
+  { href: "/dashboard",  label: "Dashboard",   icon: <AiOutlineDashboard /> },
+  { href: "/clustering", label: "Clustering",  icon: <BiScatterChart /> },
+  { href: "/chatbot",    label: "Chatbot LLM", icon: <RiRobot2Line /> },
+  { href: "/tentang",    label: "Tentang",     icon: <BsInfoCircle /> },
 ];
 
-const adminMenu: Item[] = [
-  { href: "/upload",     label: "Upload CSV",   icon: <FiUploadCloud /> },
-  { href: "/pengaturan", label: "Pengaturan",   icon: <FiSettings /> },
+const pengelolaMenu: Item[] = [
+  { href: "/upload",       label: "Upload CSV",   icon: <FiUploadCloud /> },
+  { href: "/penggaturan",  label: "Penggaturan",  icon: <FiSettings /> },
 ];
 
 export default function Sidebar() {
@@ -30,15 +28,13 @@ export default function Sidebar() {
   const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setRole(localStorage.getItem("role"));
-    }
+    if (typeof window !== "undefined") setRole(localStorage.getItem("role"));
   }, []);
 
-  // Hide sidebar on landing and login
+  // Sembunyikan sidebar pada landing & login
   if (pathname === "/" || pathname?.startsWith("/login")) return null;
 
-  const menu = role === "pengelola" ? adminMenu : umumMenu;
+  const menu = role === "pengelola" ? pengelolaMenu : umumMenu;
 
   return (
     <aside className="glass-2 h-screen w-64 p-4 sticky top-0 hidden md:flex flex-col rounded-2xl">
