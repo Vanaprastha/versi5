@@ -1,6 +1,8 @@
 // @ts-nocheck
 "use client";
 
+import InsightCard from "@/components/InsightCard";
+
 import { useState, useEffect } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,

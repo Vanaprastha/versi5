@@ -1,6 +1,8 @@
 // @ts-nocheck
 "use client";
 
+import InsightCard from "@/components/InsightCard";
+
 import { useEffect, useState } from "react";
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip

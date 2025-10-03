@@ -1,23 +1,45 @@
-"use client";
-import React from "react";
 
-export default function InsightCard({ goal, text, loading }: { goal: number; text: string; loading?: boolean; }) {
+// @ts-nocheck
+"use client";
+
+import { useState, useEffect } from "react";
+
+type Props = {
+  goal: number; // SDG ke berapa (1-17)
+};
+
+export default function InsightCard({ goal }: Props) {
+  const [insight, setInsight] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question: `Berikan insight singkat dari data SDG ${goal}.`
+      }),
+    })
+      .then(res => res.json())
+      .then(d => {
+        setInsight(d.answer || "Tidak ada insight.");
+      })
+      .catch(() => {
+        setInsight("Gagal memuat insight.");
+      })
+      .finally(() => setLoading(false));
+  }, [goal]);
+
   return (
-    <div className="p-4 rounded-2xl glass-2 shadow-md mt-3 border border-white/10">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-base font-semibold text-white">Insight SDGs {goal}</h3>
-        <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/80">LLM</span>
-      </div>
+    <div className="glass-2 p-6 rounded-xl shadow">
+      <h3 className="text-lg font-semibold mb-3">
+        Insight Otomatis SDG {goal}
+      </h3>
       {loading ? (
-        <div className="animate-pulse space-y-2">
-          <div className="h-3 w-3/4 bg-white/10 rounded" />
-          <div className="h-3 w-2/3 bg-white/10 rounded" />
-          <div className="h-3 w-1/2 bg-white/10 rounded" />
-        </div>
+        <p className="italic text-gray-400">Sedang menganalisis dengan Gemini...</p>
       ) : (
-        <div className="prose prose-invert max-w-none text-sm text-gray-200 whitespace-pre-line">
-          {text || "Tidak ada insight tersedia."}
-        </div>
+        <p className="text-sm text-gray-100 whitespace-pre-line">{insight}</p>
       )}
     </div>
   );
