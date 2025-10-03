@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useEffect, useState } from "react";
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip
@@ -25,6 +23,7 @@ export default function SDG17Page() {
     proklim: data.filter(d => d["Status desa termasuk Program Kampung Iklim (Proklim)"] === "termasuk").length,
     perhutanan: data.filter(d => d["Keberadaan Program perhutanan sosial"] === "ada").length,
     siaran: data.filter(d => d["status penerimaan program siaran televisi/radio swasta"] === "bisa diterima").length,
+  };
 
   // Tooltip custom untuk Pie
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -42,7 +41,8 @@ export default function SDG17Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   // Fungsi untuk render PieChart per indikator
   const renderPieChart = (key: string, title: string) => {
@@ -84,6 +84,7 @@ export default function SDG17Page() {
         </div>
       </div>
     );
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -132,7 +133,7 @@ export default function SDG17Page() {
           {renderPieChart("status penerimaan program siaran televisi/radio swasta", "Status penerimaan siaran televisi/radio swasta")}
         </div>
       </div>
-      <InsightCard goal=17 />
-  </div>
+    </div>
   );
 }
+

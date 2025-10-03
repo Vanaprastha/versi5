@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useState, useEffect } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -44,7 +42,8 @@ export default function SDG5Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   const indikator = [
     { key: "Jumlah Kader KB/KIA", color: "#3b82f6", short: "Kader KB/KIA" },
@@ -142,7 +141,7 @@ export default function SDG5Page() {
           ))}
         </div>
       </div>
-      <InsightCard goal=5 />
-  </div>
+    </div>
   );
 }
+

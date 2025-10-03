@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useEffect, useState } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -42,7 +40,8 @@ export default function SDG8Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   // Tooltip pie custom
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -63,7 +62,8 @@ export default function SDG8Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -174,7 +174,7 @@ export default function SDG8Page() {
           })}
         </div>
       </div>
-      <InsightCard goal=8 />
-  </div>
+    </div>
   );
 }
+

@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useEffect, useState } from "react";
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip
@@ -33,6 +31,7 @@ export default function SDG12Page() {
     pengangkutan: data.filter(
       (d) => d["Frekuensi pengangkutan sampah dalam 1 minggu"] !== "tidak ada pengangkutan sampah"
     ).length,
+  };
 
   // Tooltip custom untuk Pie Chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -55,7 +54,8 @@ export default function SDG12Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   // Fungsi untuk render pie chart
   const renderPieChart = (key: string) => {
@@ -101,6 +101,7 @@ export default function SDG12Page() {
         </div>
       </div>
     );
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -145,7 +146,7 @@ export default function SDG12Page() {
           {renderPieChart("Frekuensi pengangkutan sampah dalam 1 minggu")}
         </div>
       </div>
-      <InsightCard goal=12 />
-  </div>
+    </div>
   );
 }
+

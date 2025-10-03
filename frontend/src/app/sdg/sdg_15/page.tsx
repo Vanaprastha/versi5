@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useEffect, useState } from "react";
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip
@@ -31,6 +29,7 @@ export default function SDG15Page() {
     adaPenanaman: data.filter((d) =>
       String(d["Penanaman/pemeliharaan pepohonan di lahan kritis, penanaman mangrove, dan sejenisnya oleh masyarakat desa/kelurahan"]).includes("Ada")
     ).length,
+  };
 
   // Tooltip custom
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -53,7 +52,8 @@ export default function SDG15Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   // Generate pie chart per indikator
   const renderPieChart = (key: string) => {
@@ -99,6 +99,7 @@ export default function SDG15Page() {
         </div>
       </div>
     );
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -139,7 +140,7 @@ export default function SDG15Page() {
           {renderPieChart("Kepemilikan hutan milik desa")}
         </div>
       </div>
-      <InsightCard goal=15 />
-  </div>
+    </div>
   );
 }
+

@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useEffect, useState } from "react";
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip
@@ -33,6 +31,7 @@ export default function SDG9Page() {
       String(d["Akses jalan darat dari sentra produksi pertanian ke jalan utama dapat dilalui kendaraan roda 4 lebih"])
         .includes("Sepanjang tahun")
     ).length,
+  };
 
   // Tooltip custom untuk pie chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -53,7 +52,8 @@ export default function SDG9Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   // Fungsi untuk generate pie chart
   const renderPieChart = (key: string, title: string) => {
@@ -99,6 +99,7 @@ export default function SDG9Page() {
         </div>
       </div>
     );
+  };
 
   return (
     <div className="p-6 space-y-6">
@@ -147,7 +148,7 @@ export default function SDG9Page() {
           {renderPieChart("Akses jalan darat dari sentra produksi pertanian ke jalan utama dapat dilalui kendaraan roda 4 lebih", "Akses Jalan Sentra Pertanian")}
         </div>
       </div>
-      <InsightCard goal=9 />
-  </div>
+    </div>
   );
 }
+

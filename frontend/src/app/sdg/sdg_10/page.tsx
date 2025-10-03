@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useEffect, useState } from "react";
 
 export default function SDG10Page() {
@@ -25,7 +23,6 @@ export default function SDG10Page() {
           {JSON.stringify(data, null, 2)}
         </pre>
       )}
-      <InsightCard goal=10 />
-  </div>
+    </div>
   );
 }

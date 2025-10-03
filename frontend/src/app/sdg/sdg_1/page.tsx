@@ -1,8 +1,6 @@
 // @ts-nocheck
 "use client";
 
-import InsightCard from "@/components/InsightCard";
-
 import { useState, useEffect } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -11,6 +9,15 @@ import {
 
 export default function SDG1Page() {
   const [dataSDG1, setDataSDG1] = useState<any[]>([]);
+  const [insight, setInsight] = useState<string>("");
+
+  useEffect(() => {
+    fetch("/api/sdgs1_insight")
+      .then(res => res.json())
+      .then(d => setInsight(d.insight))
+      .catch(err => console.error(err));
+  }, []);
+
 
   useEffect(() => {
     fetch("/api/sdgs1")
@@ -54,7 +61,8 @@ export default function SDG1Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   // Tooltip untuk Pie Chart (daftar desa per kategori)
   const CustomTooltip = ({ active, payload }: any) => {
@@ -80,7 +88,8 @@ export default function SDG1Page() {
         </div>
       );
     }
-    return <p className="text-gray-400">Memuat data...</p>;
+    return null;
+  };
 
   return (
     <div className="space-y-6 p-6">
@@ -200,7 +209,15 @@ export default function SDG1Page() {
           })}
         </div>
       </div>
-      <InsightCard goal=1 />
-  </div>
+    
+      {/* Card Insight dari LLM */}
+      {insight && (
+        <div className="glass-4 p-6 rounded-2xl shadow-lg">
+          <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
+          <p className="text-sm text-gray-100 whitespace-pre-line">{insight}</p>
+        </div>
+      )}
+</div>
   );
 }
+
