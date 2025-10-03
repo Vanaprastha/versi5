@@ -150,7 +150,7 @@ export default function SDG3Page() {
         <div className="grid grid-cols-2 gap-6">
           {[
             "ketersediaan program jaminan layanan kesehatan khusus untuk ibu hamil",
-            "ketersediaan jaminan layanan kesehatan untuk anak baduta"
+            "ketersediaan jaminan layanan kesehatan untuk bayi dibawah dua tahun(baduta)"
           ].map((key, idx) => {
             // Hitung jumlah per kategori
             const counts: Record<string, number> = {};
