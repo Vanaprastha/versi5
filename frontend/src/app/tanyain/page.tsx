@@ -5,13 +5,13 @@ import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; text: string };
 
-export default function ChatbotPage() {
+export default function TanyaInPage() {
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState<Msg[]>([
     {
       role: "assistant",
-      text: "🌱 Halo! Saya chatbot SDGs. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
+      text: "🤖 Halo! Saya **TanyaIn**. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
     },
   ]);
 
@@ -54,10 +54,11 @@ export default function ChatbotPage() {
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6 text-white">
       <h1 className="text-3xl font-bold text-center text-emerald-700 drop-shadow-md">
-        💬 Chatbot SDGs
+        🤖 TanyaIn
       </h1>
       <p className="text-center">
-        Tanyakan apa saja tentang data <span className="font-semibold">SDGs 1–17</span>.
+        Tanyakan apa saja tentang data{" "}
+        <span className="font-semibold">SDGs 1–17</span>.
       </p>
 
       {/* Chat Window */}
@@ -83,12 +84,10 @@ export default function ChatbotPage() {
               >
                 <b
                   className={
-                    m.role === "user"
-                      ? "text-blue-100"
-                      : "text-emerald-700"
+                    m.role === "user" ? "text-blue-100" : "text-emerald-700"
                   }
                 >
-                  {m.role === "user" ? "Kamu" : "Asisten"}:
+                  {m.role === "user" ? "Kamu" : "TanyaIn"}:
                 </b>{" "}
                 {/* @ts-expect-error react-markdown typing issue */}
                 <ReactMarkdown>{m.text}</ReactMarkdown>
@@ -99,7 +98,7 @@ export default function ChatbotPage() {
 
         {loading && (
           <div className="italic animate-pulse text-emerald-300">
-            Asisten mengetik…
+            TanyaIn sedang mengetik…
           </div>
         )}
         <div ref={bottomRef} />
