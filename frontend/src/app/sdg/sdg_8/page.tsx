@@ -42,7 +42,7 @@ export default function SDG8Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Tooltip pie custom
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -63,7 +63,7 @@ export default function SDG8Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   return (
     <div className="p-6 space-y-6">

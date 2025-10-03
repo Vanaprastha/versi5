@@ -53,7 +53,7 @@ export default function SDG15Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Generate pie chart per indikator
   const renderPieChart = (key: string) => {

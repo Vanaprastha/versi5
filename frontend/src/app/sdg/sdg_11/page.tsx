@@ -48,7 +48,7 @@ export default function SDG11Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Fungsi render Pie Chart per indikator
   const renderPieChart = (key: string) => {

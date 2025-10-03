@@ -44,7 +44,7 @@ export default function SDG5Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   const indikator = [
     { key: "Jumlah Kader KB/KIA", color: "#3b82f6", short: "Kader KB/KIA" },

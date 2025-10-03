@@ -33,7 +33,7 @@ export default function SDG4Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Tooltip custom untuk pie chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -54,7 +54,7 @@ export default function SDG4Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   return (
     <div className="p-6 space-y-6">

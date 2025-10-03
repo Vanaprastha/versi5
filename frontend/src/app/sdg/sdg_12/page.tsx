@@ -55,7 +55,7 @@ export default function SDG12Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Fungsi untuk render pie chart
   const renderPieChart = (key: string) => {

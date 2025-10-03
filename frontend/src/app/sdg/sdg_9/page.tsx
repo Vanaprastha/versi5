@@ -53,7 +53,7 @@ export default function SDG9Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Fungsi untuk generate pie chart
   const renderPieChart = (key: string, title: string) => {

@@ -54,7 +54,7 @@ export default function SDG1Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   // Tooltip untuk Pie Chart (daftar desa per kategori)
   const CustomTooltip = ({ active, payload }: any) => {
@@ -80,7 +80,7 @@ export default function SDG1Page() {
         </div>
       );
     }
-    return null;
+    return <p className="text-gray-400">Memuat data...</p>;
 
   return (
     <div className="space-y-6 p-6">
