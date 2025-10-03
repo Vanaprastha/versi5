@@ -14,8 +14,18 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export async function GET(req: NextRequest) {
   try {
-    // Ambil data dari sdgs_1
-    const { data: rows, error } = await supabase.from("sdgs_1").select("*");
+    const { searchParams } = new URL(req.url);
+    const sdg = parseInt(searchParams.get("sdg") || "0", 10);
+
+    if (!sdg || sdg < 1 || sdg > 17) {
+      return new Response(
+        JSON.stringify({ error: "Invalid or missing sdg parameter (1-17)" }),
+        { status: 400 }
+      );
+    }
+
+    // Ambil data dari tabel sesuai SDG
+    const { data: rows, error } = await supabase.from(`sdgs_${sdg}`).select("*");
     if (error) throw new Error(error.message);
 
     // Ambil label
@@ -28,7 +38,7 @@ export async function GET(req: NextRequest) {
       labelMap[l.kode_kolom] = l.nama_kolom;
     });
 
-    // Transformasi data agar readable
+    // Ambil sample data
     const sample = (rows ?? []).slice(0, 8).map((row: any) => {
       const mapped: Record<string, any> = { nama_desa: row.nama_desa };
       Object.keys(row).forEach((k) => {
@@ -41,10 +51,10 @@ export async function GET(req: NextRequest) {
 
     // Prompt insight
     const prompt = `
-      Anda adalah analis data. Berikut contoh data SDG 1 (tanpa kemiskinan) untuk beberapa desa:
+      Anda adalah analis data. Berikut contoh data SDG ${sdg} untuk beberapa desa:
       ${JSON.stringify(sample, null, 2)}
 
-      Buat ringkasan insight singkat (3-5 kalimat) mengenai kondisi kemiskinan berdasarkan data ini.
+      Buat ringkasan insight singkat (3-5 kalimat) mengenai kondisi SDG ini.
       Gunakan bahasa sederhana dan informatif.
     `;
 

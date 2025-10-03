@@ -30,7 +30,7 @@ export default function SDG1Page() {
 
   // Fetch insight dari LLM
   useEffect(() => {
-    fetch("/api/sdgs1_insight")
+    fetch("/api/insight?sdg=1")
       .then(res => res.json())
       .then(d => {
         console.log("INSIGHT FETCHED:", d);

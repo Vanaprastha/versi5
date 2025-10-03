@@ -12,7 +12,7 @@ export default function SDG2Page() {
   const [insight, setInsight] = useState<string>("");
 
   useEffect(() => {
-    fetch("/api/sdgs2_insight")
+    fetch("/api/insight?sdg=2")
       .then(res => res.json())
       .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
       .catch(err => setInsight("sedang memberikan insight berdasarkan data...."));
