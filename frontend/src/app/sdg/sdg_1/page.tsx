@@ -11,14 +11,7 @@ export default function SDG1Page() {
   const [dataSDG1, setDataSDG1] = useState<any[]>([]);
   const [insight, setInsight] = useState<string>("");
 
-  useEffect(() => {
-    fetch("/api/sdgs1_insight")
-      .then(res => res.json())
-      .then(d => setInsight(d.insight))
-      .catch(err => console.error(err));
-  }, []);
-
-
+  // Fetch data SDG1
   useEffect(() => {
     fetch("/api/sdgs1")
       .then(res => res.json())
@@ -33,6 +26,20 @@ export default function SDG1Page() {
         setDataSDG1(d);
       })
       .catch(err => console.error(err));
+  }, []);
+
+  // Fetch insight dari LLM
+  useEffect(() => {
+    fetch("/api/sdgs1_insight")
+      .then(res => res.json())
+      .then(d => {
+        console.log("INSIGHT FETCHED:", d);
+        setInsight(d.insight || "Insight tidak tersedia.");
+      })
+      .catch(err => {
+        console.error(err);
+        setInsight("Insight tidak tersedia (gagal fetch API).");
+      });
   }, []);
 
   // Ambil semua kolom selain nama_desa dan SKTM
@@ -131,7 +138,7 @@ export default function SDG1Page() {
         })}
       </div>
 
-      {/* Card Ringkasan Total SKTM (dipindah ke bawah) */}
+      {/* Card Ringkasan Total SKTM */}
       <div className="grid grid-cols-1">
         <div className="glass-2 p-6 rounded-xl text-center shadow col-span-1 md:col-span-3">
           <h4 className="font-semibold text-lg mb-2">Total SKTM</h4>
@@ -209,15 +216,14 @@ export default function SDG1Page() {
           })}
         </div>
       </div>
-    
+
       {/* Card Insight dari LLM */}
-      {insight && (
-        <div className="glass-4 p-6 rounded-2xl shadow-lg">
-          <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
-          <p className="text-sm text-gray-100 whitespace-pre-line">{insight}</p>
-        </div>
-      )}
-</div>
+      <div className="glass-4 p-6 rounded-2xl shadow-lg">
+        <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
+        <p className="text-sm text-gray-100 whitespace-pre-line">
+          {insight || "Insight belum tersedia..."}
+        </p>
+      </div>
+    </div>
   );
 }
-
