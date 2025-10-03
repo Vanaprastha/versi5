@@ -1,76 +1,65 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import {
-  LayoutDashboard,
-  Map,
-  MessageSquare,
-  Settings,
-  Info
-} from "lucide-react";
+import type { Route } from "next";
+import type { ReactNode } from "react";
 
-const routes = [
-  {
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-    color: "text-sky-500",
-  },
-  {
-    label: "Clustering Wilayah",
-    icon: Map,
-    href: "/clustering",
-    color: "text-emerald-500",
-  },
-  {
-    label: "TanyaIn",
-    icon: MessageSquare,
-    href: "/tanyain",
-    color: "text-pink-500",
-  },
-  {
-    label: "Pengaturan",
-    icon: Settings,
-    href: "/pengaturan",
-    color: "text-orange-500",
-  },
-  {
-    label: "Tentang",
-    icon: Info,
-    href: "/tentang",
-    color: "text-indigo-500",
-  },
-];
+import { AiOutlineDashboard } from "react-icons/ai";
+import { BiScatterChart } from "react-icons/bi";
+import { RiRobot2Line } from "react-icons/ri";
+import { FiSettings } from "react-icons/fi";
+import { BsInfoCircle } from "react-icons/bs";
+import Image from "next/image";
 
-const Sidebar = () => {
-  const pathname = usePathname();
-
-  return (
-    <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
-      <div className="px-3 py-2 flex-1">
-        <div className="space-y-1">
-          {routes.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
-              className={cn(
-                "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
-                pathname === route.href
-                  ? "bg-white/10 text-white"
-                  : "text-zinc-400"
-              )}
-            >
-              <route.icon className={cn("h-5 w-5 mr-3", route.color)} />
-              {route.label}
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+type NavItem = {
+  href: Route;
+  label: string;
+  icon: ReactNode;
 };
 
-export default Sidebar;
+const items = [
+  { href: "/" as Route,           label: "Dashboard",         icon: <AiOutlineDashboard /> },
+  { href: "/clustering" as Route, label: "Clustering Wilayah",icon: <BiScatterChart /> },
+  { href: "/tanyain" as Route,    label: "TanyaIn",           icon: <RiRobot2Line /> },
+  { href: "/pengaturan" as Route, label: "Pengaturan",        icon: <FiSettings /> },
+  { href: "/tentang" as Route,    label: "Tentang",           icon: <BsInfoCircle /> },
+] as const satisfies readonly NavItem[];
+
+export default function Sidebar() {
+  const pathname = usePathname();
+  return (
+    <aside className="glass-2 h-screen w-64 p-4 sticky top-0 hidden md:flex flex-col rounded-2xl">
+      <div className="flex items-center gap-3 pb-4 border-b border-white/10">
+        <Image src="/logo-pemda.png" alt="Logo Pemda" width={36} height={36} />
+        <div className="text-sm">
+          <p className="font-semibold">Dashboard SDGs</p>
+          <p className="text-neutral-300">Pemerintah Daerah Kecamatan Wates</p>
+        </div>
+      </div>
+
+      <nav className="mt-4 flex-1 space-y-1">
+        {items.map((it) => {
+          const active = pathname === it.href;
+          return (
+            <Link
+              key={it.href}
+              href={it.href}
+              aria-current={active ? "page" : undefined}
+              className={`flex items-center gap-3 px-3 py-2 rounded-xl transition ${
+                active ? "bg-white/10" : "hover:bg-white/5"
+              }`}
+            >
+              <span className="text-lg opacity-80">{it.icon}</span>
+              <span className="text-sm">{it.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
+      <p className="text-[11px] text-neutral-400">
+        © {new Date().getFullYear()} Pemerintah Daerah Kecamatan Wates
+      </p>
+    </aside>
+  );
+}
 
