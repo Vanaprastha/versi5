@@ -14,14 +14,14 @@ export default function SDG2Page() {{
       .then(res => res.json())
       .then(d => setDataSDG2(d))
       .catch(err => console.error(err));
-  }}, []);
+  }, []);
 
   useEffect(() => {{
     fetch("/api/insight?sdg=2")
       .then(res => res.json())
       .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
       .catch(err => setInsight("sedang memberikan insight berdasarkan data...."));
-  }}, []);
+  }, []);
 
   return (
     <div className="space-y-6 p-6">
